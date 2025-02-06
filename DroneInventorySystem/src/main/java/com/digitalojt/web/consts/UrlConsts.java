@@ -25,6 +25,12 @@ public class UrlConsts {
 
 	// 在庫一覧画面 初期
 	public static final String STOCK_LIST_INDEX = "admin/stockList/index";
+	
+	//分類情報管理画面
+	public static final String CATEGORY_LIST = "/admin/categoryList";
+	
+	//分類情報管理画面　テンプレート名
+	public static final String CATEGORY_LIST_INDEX = "admin/categoryList/index";
 
 	// 在庫一覧画面 検索
 	public static final String STOCK_LIST_SEARCH = "/admin/stockList/search";
