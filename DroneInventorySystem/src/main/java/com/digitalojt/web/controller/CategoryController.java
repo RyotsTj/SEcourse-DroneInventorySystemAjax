@@ -1,7 +1,5 @@
 package com.digitalojt.web.controller;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,9 +38,8 @@ public class CategoryController extends AbstractController {
     public String index(Model model) {
         logStart(LogMessage.HTTP_GET);
 
-        List<CategoryInfo> categoryList = service.getCategoryInfoData(null, null); 
-        Collections.sort(categoryList, Comparator.comparingInt(CategoryInfo::getCategoryId));
-        model.addAttribute(ModelAttributeContents.CATEGORY_LIST, categoryList.stream()
+        List<CategoryInfo> categoryInfoList = service.getCategoryInfoData();
+        model.addAttribute(ModelAttributeContents.CATEGORY_LIST, categoryInfoList.stream()
                 .map(CategoryInfo::getCategoryName)
                 .collect(Collectors.toList()));
         

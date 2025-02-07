@@ -25,11 +25,9 @@ public class CategoryInfoService {
 	/**
 	 * 引数に合致する分類情報を取得
 	 * 
-	 * @param categoryId
-	 * @param categoryName 
 	 * @return
 	 */
-	public List<CategoryInfo> getCategoryInfoData(Integer categoryId, String categoryName) {
-		return repository.findByCategoryIdAndCategoryName(categoryId, categoryName);
+    public List<CategoryInfo> getCategoryInfoData() {
+        return repository.findAllByOrderByCategoryIdAsc();
 	}
 }
