@@ -9,6 +9,9 @@
 	  .table-bordered th {
 	    background-color: lightgray;
 	  }
+	  .text-center {
+	    text-align: center;
+	  }
 	</style>
   </head>
 
@@ -20,22 +23,17 @@
 
 	  <div class="card-body"> 
 		<div class="table-responsive"> 
-          <table
-            class="table table-bordered"
-            id="dataTable"
-            width="100%"
-            cellspacing="0"
-          >
-		  <thead>
-		    <tr>
-			  <td align="center" style="background-color: lightgray;">分類</td>
-		    </tr>
-		  </thead>
-            <tbody>
-				<tr th:each="categoryName : ${categoryNames}">
-				<td th:text="${categoryName}" align="center"></td>
-				</tr>
-            </tbody>
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+			<thead>
+			  <tr>
+			    <th class="text-center">分類</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr th:each="item : ${categoryList}">
+			    <td th:text="${item}" class="text-center"></td>
+			  </tr>
+			</tbody>
           </table>
         </div>
       </div>

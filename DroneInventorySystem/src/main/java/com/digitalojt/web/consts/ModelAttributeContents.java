@@ -22,7 +22,7 @@ public class ModelAttributeContents {
 	public static final String OPERATION_LOG_LIST = "operationLogList";
 	
 	//分類情報一覧
-	public static final String CATEGORY_NAMES = "categoryNames";
+	public static final String CATEGORY_LIST = "categoryList";
 	
 	
 	

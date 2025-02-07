@@ -1,6 +1,7 @@
 package com.digitalojt.web.controller;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,10 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.digitalojt.web.consts.Category;
 import com.digitalojt.web.consts.LogMessage;
 import com.digitalojt.web.consts.ModelAttributeContents;
 import com.digitalojt.web.consts.UrlConsts;
+import com.digitalojt.web.entity.CategoryInfo;
+import com.digitalojt.web.service.CategoryInfoService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,20 +27,26 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryController extends AbstractController {
 	
+	/** 分類情報 サービス */
+	private final CategoryInfoService service;
+	
     /**
-     * 初期表示
+     * 分類情報テーブルから取得したデータを使用して画面の初期表示を実行する。
      *
-     * @return String(path)
+     * @param model
+     * @return String(Viewの名前：分類情報管理画面)
      */
     @GetMapping(UrlConsts.CATEGORY_LIST)
     public String index(Model model) {
         logStart(LogMessage.HTTP_GET);
 
-        List<String> categoryNames = Arrays.stream(Category.values())
-                .map(Category::getName)
-                .collect(Collectors.toList());
-
-        model.addAttribute(ModelAttributeContents.CATEGORY_NAMES, categoryNames);
+        List<CategoryInfo> categoryList = service.getCategoryInfoData(null, null); 
+        Collections.sort(categoryList, Comparator.comparingInt(CategoryInfo::getCategoryId));
+        model.addAttribute(ModelAttributeContents.CATEGORY_LIST, categoryList.stream()
+                .map(CategoryInfo::getCategoryName)
+                .collect(Collectors.toList()));
+        
+        logEnd(LogMessage.HTTP_GET);
         return UrlConsts.CATEGORY_LIST_INDEX;
     }
 }
