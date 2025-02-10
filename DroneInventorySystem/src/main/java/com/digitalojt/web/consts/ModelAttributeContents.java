@@ -20,7 +20,9 @@ public class ModelAttributeContents {
 	/** 操作履歴画面 */
 	// 操作履歴一覧
 	public static final String OPERATION_LOG_LIST = "operationLogList";
-
+	
+	//分類情報一覧
+	public static final String CATEGORY_LIST = "categoryList";
 	
 	
 	

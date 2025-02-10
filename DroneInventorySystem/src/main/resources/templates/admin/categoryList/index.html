@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}"
+>
+  <head>
+    <title>InvenTrack</title>
+	<style>
+	  .table-bordered th {
+	    background-color: lightgray;
+	  }
+	  .text-center {
+	    text-align: center;
+	  }
+	</style>
+  </head>
+
+  <body>
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">分類情報管理</h6>
+      </div>
+
+	  <div class="card-body"> 
+		<div class="table-responsive"> 
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+			<thead>
+			  <tr>
+			    <th class="text-center">分類</th>
+			  </tr>
+			</thead>
+			<tbody>
+			  <tr th:each="item : ${categoryList}">
+			    <td th:text="${item}" class="text-center"></td>
+			  </tr>
+			</tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
