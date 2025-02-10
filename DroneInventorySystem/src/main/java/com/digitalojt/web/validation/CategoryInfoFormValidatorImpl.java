@@ -1,7 +1,5 @@
 package com.digitalojt.web.validation;
 
-import java.util.Locale;
-
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -60,11 +58,14 @@ public class CategoryInfoFormValidatorImpl implements ConstraintValidator<Catego
     }
 
     /**
-     * メッセージキーをバリデーションコンテキストに追加
+     * エラーメッセージをコンテキストに追加
+     * 
+     * @param context バリデーションコンテキスト
+     * @param message エラーメッセージ
      */
-    private void addErrorMessage(ConstraintValidatorContext context, String messageKey) {
-        String errorMessage = messageSource.getMessage(messageKey, null, Locale.JAPANESE);
+    private void addErrorMessage(ConstraintValidatorContext context, String message) {
         context.disableDefaultConstraintViolation();
-        context.buildConstraintViolationWithTemplate(errorMessage).addConstraintViolation();
+        context.buildConstraintViolationWithTemplate(message)
+               .addConstraintViolation();
     }
 }

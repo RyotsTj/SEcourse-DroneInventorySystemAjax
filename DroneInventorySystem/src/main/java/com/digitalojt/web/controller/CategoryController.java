@@ -69,20 +69,9 @@ public class CategoryController extends AbstractController {
 		// Valid項目チェック
 		if (bindingResult.hasErrors()) {
 			// エラーメッセージをプロパティファイルから取得
-	        String errorMsg = "入力エラーが発生しました。";
-
-	        if (bindingResult.getFieldError(categoryName) != null) {
-	            String errorKey = bindingResult.getFieldError(categoryName).getCode();
-
-	            if (errorKey != null) {
-	                errorMsg = MessageManager.getMessage(messageSource, errorKey, "予期せぬエラーが発生しました。");
-	            }
-	        }
-	        
+			String errorMsg = MessageManager.getMessage(messageSource, bindingResult.getGlobalError().getDefaultMessage());
 			model.addAttribute(LogMessage.FLASH_ATTRIBUTE_ERROR, errorMsg);
-			
 			logValidationError(LogMessage.HTTP_POST, form + errorMsg);
-
 			return UrlConsts.CATEGORY_LIST_INDEX;
 		}
 		
