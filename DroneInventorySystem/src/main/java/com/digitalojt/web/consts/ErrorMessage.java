@@ -22,4 +22,14 @@ public class ErrorMessage {
 
 	// 文字超過に関するエラーメッセージ
 	public static final String CENTER_NAME_LENGTH_ERROR_MESSAGE = "centerName.length.wrongInput";
+	
+	// 空欄チェック
+	public static final String CATEGORY_NAME_REQUIRED = "category.name.required";
+	
+	// 禁止文字チェック（{ } ; = $ & を含んでいるか）
+	public static final String CATEGORY_NAME_FORBIDDEN = "category.name.forbidden";
+	
+	// 文字数チェック
+	public static final String CATEGORY_NAME_LENGTH = "category.name.length";
+
 }

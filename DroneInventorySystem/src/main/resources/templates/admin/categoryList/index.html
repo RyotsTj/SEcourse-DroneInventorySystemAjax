@@ -5,14 +5,7 @@
 >
   <head>
     <title>InvenTrack</title>
-	<style>
-	  .table-bordered th {
-	    background-color: lightgray;
-	  }
-	  .text-center {
-	    text-align: center;
-	  }
-	</style>
+    <link rel="stylesheet" type="text/css" href="styles.css">
   </head>
 
   <body>
@@ -22,16 +15,31 @@
       </div>
 
 	  <div class="card-body"> 
+		<!-- 検索フォーム -->
+		<div class="search-container">
+			<form class="form-inline" method="post" th:action="@{'/admin/categoryList/search'}">
+				<label for="searchTerm" class="mr-2 search-label">検索条件</label>
+				<label for="searchTerm" class="mr-2">分類名</label>
+				<input type="text" id="searchTerm" name="categoryName" class="form-control mr-2">
+				<button type="submit" class="btn btn-primary">検索</button>
+			</form>
+			<!-- エラーメッセージの表示 -->
+			<div th:if="${errorMsg != null}" class="text-danger">
+				 <p th:text="${errorMsg}"></p>
+			</div>
+		</div>
+		
+		<!-- 分類情報管理 分類情報テーブル -->
 		<div class="table-responsive"> 
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 			<thead>
 			  <tr>
-			    <th class="text-center">分類</th>
+			    <th>分類</th>
 			  </tr>
 			</thead>
 			<tbody>
 			  <tr th:each="item : ${categoryList}">
-			    <td th:text="${item}" class="text-center"></td>
+			    <td th:text="${item}"></td>
 			  </tr>
 			</tbody>
           </table>
