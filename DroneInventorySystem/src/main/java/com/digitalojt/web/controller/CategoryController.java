@@ -1,6 +1,5 @@
 package com.digitalojt.web.controller;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
@@ -38,8 +37,7 @@ public class CategoryController extends AbstractController {
     public String index(Model model) {
         logStart(LogMessage.HTTP_GET);
 
-        List<CategoryInfo> categoryInfoList = service.getCategoryInfoData();
-        model.addAttribute(ModelAttributeContents.CATEGORY_LIST, categoryInfoList.stream()
+        model.addAttribute(ModelAttributeContents.CATEGORY_LIST, service.getCategoryInfoData().stream()
                 .map(CategoryInfo::getCategoryName)
                 .collect(Collectors.toList()));
         

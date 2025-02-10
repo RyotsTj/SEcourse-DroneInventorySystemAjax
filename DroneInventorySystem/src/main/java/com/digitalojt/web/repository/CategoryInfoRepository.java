@@ -18,8 +18,6 @@ public interface CategoryInfoRepository extends JpaRepository<CategoryInfo, Inte
 	/**
 	 * 引数に合致する分類情報を取得
 	 * 
-	 * @param categoryId
-	 * @param categoryName 
 	 *
 	 */
 	List<CategoryInfo> findAllByOrderByCategoryIdAsc();
