@@ -38,6 +38,6 @@ public class CategoryInfoService {
 	 * @return 分類情報テーブルを名前検索した結果
 	 */
     public List<CategoryInfo> getCategoryInfoData(String categoryName) {
-        return repository.findByCategoryName(categoryName);
+        return repository.findByCategoryNameOrderByCategoryIdAsc(categoryName);
 	}
 }

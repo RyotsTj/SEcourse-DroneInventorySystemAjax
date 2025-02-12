@@ -18,9 +18,12 @@
 }
 
 /* 検索ボタン（薄オレンジ色） */
-.search-container button:hover {
+.search-container button {
     background-color: #f8c471;
     padding: 1px 10px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease;
 }
 
 /* テーブルのヘッダー（グレー色）*/
@@ -34,8 +37,7 @@
     padding: 10px;
 }
 
-/* ホバー時、ボタンの色を変更 */
-a:hover {
-    color: #f39c12;
-    text-decoration: underline;
+/* ホバー時（濃いオレンジ） */
+.search-container button:hover {
+    background-color: #e67e22; /* 濃いオレンジ */
 }
