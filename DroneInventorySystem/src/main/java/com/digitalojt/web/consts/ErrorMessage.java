@@ -23,13 +23,13 @@ public class ErrorMessage {
 	// 文字超過に関するエラーメッセージ
 	public static final String CENTER_NAME_LENGTH_ERROR_MESSAGE = "centerName.length.wrongInput";
 	
-	// 空欄チェック
+	// 空欄の場合のエラーメッセージキー
 	public static final String CATEGORY_NAME_REQUIRED = "category.name.required";
 	
-	// 禁止文字チェック（{ } ; = $ & を含んでいるか）
+	// 禁止文字チェック（{ } ; = $ & ）が含まれている場合のエラーメッセージキー
 	public static final String CATEGORY_NAME_FORBIDDEN = "category.name.forbidden";
 	
-	// 文字数チェック
-	public static final String CATEGORY_NAME_LENGTH = "category.name.length";
-
+	// 文字数が制限を超えた場合のエラーメッセージキー
+	public static final String CATEGORY_NAME_INVALID_LENGTH = "category.name.length";
+	
 }

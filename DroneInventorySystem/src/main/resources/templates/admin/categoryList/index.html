@@ -5,7 +5,7 @@
 >
   <head>
     <title>InvenTrack</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" th:href="@{/styles.css}"/>
   </head>
 
   <body>
@@ -17,15 +17,15 @@
 	  <div class="card-body"> 
 		<!-- 検索フォーム -->
 		<div class="search-container">
-			<form class="form-inline" method="post" th:action="@{'/admin/categoryList/search'}">
+			<form class="form-inline" method="get" th:action="@{'/admin/categoryList/search'}">
 				<label for="searchTerm" class="mr-2 search-label">検索条件</label>
 				<label for="searchTerm" class="mr-2">分類名</label>
 				<input type="text" id="searchTerm" name="categoryName" class="form-control mr-2">
 				<button type="submit" class="btn btn-primary">検索</button>
 			</form>
 			<!-- エラーメッセージの表示 -->
-			<div th:if="${errorMsg != null}" class="text-danger">
-				 <p th:text="${errorMsg}"></p>
+			<div th:if="${not #strings.isEmpty(errorMsg)}" class="text-danger">
+				<p th:utext="${errorMsg}"></p> 
 			</div>
 		</div>
 		
@@ -39,7 +39,7 @@
 			</thead>
 			<tbody>
 			  <tr th:each="item : ${categoryList}">
-			    <td th:text="${item}"></td>
+			    <td th:text="${item.categoryName}"></td>
 			  </tr>
 			</tbody>
           </table>
