@@ -16,9 +16,16 @@ import com.digitalojt.web.entity.CategoryInfo;
 @Repository
 public interface CategoryInfoRepository extends JpaRepository<CategoryInfo, Integer>{
 	/**
-	 * 引数に合致する分類情報を取得
-	 * 
-	 *
+	 * 分類情報を取得
 	 */
 	List<CategoryInfo> findAllByOrderByCategoryIdAsc();
+	
+	/**
+	 * 引数に合致する分類情報を取得を取得
+	 * categoryNameで検索し、結果をcategoryIdの昇順でソートする
+	 * 
+	 * @param categoryName
+	 * @return paramで検索した結果
+	 */
+	List<CategoryInfo> findByCategoryNameOrderByCategoryIdAsc(String categoryName);
 }

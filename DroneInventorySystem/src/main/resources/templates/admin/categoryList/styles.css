@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/* 検索フォームを左寄せにする */
+.search-container {
+    margin-bottom: 20px;
+}
+
+/* 検索フォームを横並びにする */
+.search-container form {
+    display: flex;
+    align-items: center;
+	justify-content: flex-start;
+    gap: 10px;
+}
+
+/* 検索条件に黒い下線を追加する */
+.search-container label.search-label {
+    border-bottom: 1px solid #000;
+}
+
+/* 検索ボタン（薄オレンジ色） */
+.search-container button {
+    background-color: #f8c471;
+    padding: 1px 10px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease;
+}
+
+/* テーブルのヘッダー（グレー色）*/
+.table-bordered th {
+    background-color: #d3d3d3;
+    text-align: center;
+}
+
+/* テーブル内のセルに余白を追加 */
+.table-bordered th, .table-bordered td {
+    padding: 10px;
+}
+
+/* ホバー時（濃いオレンジ） */
+.search-container button:hover {
+    background-color: #e67e22; /* 濃いオレンジ */
+}

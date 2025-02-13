@@ -30,4 +30,14 @@ public class CategoryInfoService {
     public List<CategoryInfo> getCategoryInfoData() {
         return repository.findAllByOrderByCategoryIdAsc();
 	}
+    
+	/**
+	 * 分類情報テーブル 名前検索
+	 * 
+	 * @param categoryName 名前
+	 * @return 分類情報テーブルを名前検索した結果
+	 */
+    public List<CategoryInfo> getCategoryInfoData(String categoryName) {
+        return repository.findByCategoryNameOrderByCategoryIdAsc(categoryName);
+	}
 }

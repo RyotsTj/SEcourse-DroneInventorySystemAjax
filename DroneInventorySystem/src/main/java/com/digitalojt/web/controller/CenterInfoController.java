@@ -3,6 +3,8 @@ package com.digitalojt.web.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +22,6 @@ import com.digitalojt.web.form.CenterInfoForm;
 import com.digitalojt.web.service.CenterInfoService;
 import com.digitalojt.web.util.MessageManager;
 
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 /**
