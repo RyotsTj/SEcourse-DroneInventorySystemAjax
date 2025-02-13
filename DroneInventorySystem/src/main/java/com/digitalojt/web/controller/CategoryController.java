@@ -75,6 +75,8 @@ public class CategoryController extends AbstractController {
 			model.addAttribute(LogMessage.FLASH_ATTRIBUTE_ERROR, errorMsg);
 			logValidationError(LogMessage.HTTP_POST, bindingResult.getFieldErrors().toString());
 			
+			model.addAttribute(ModelAttributeContents.CATEGORY_LIST, service.getCategoryInfoData());
+			
 			return UrlConsts.CATEGORY_LIST_INDEX;
 		}
 		
@@ -85,6 +87,7 @@ public class CategoryController extends AbstractController {
 	    if (searchResults.isEmpty()) {
 	        model.addAttribute(LogMessage.FLASH_ATTRIBUTE_ERROR, "※データがありません。");
 	        logValidationError(LogMessage.HTTP_POST, "※データがありません。");
+	        model.addAttribute(ModelAttributeContents.CATEGORY_LIST, service.getCategoryInfoData());
 	        return UrlConsts.CATEGORY_LIST_INDEX;
 	    }
 	    

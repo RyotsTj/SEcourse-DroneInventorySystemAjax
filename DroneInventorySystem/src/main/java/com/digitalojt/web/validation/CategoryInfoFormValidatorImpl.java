@@ -13,8 +13,8 @@ import com.digitalojt.web.form.CategoryInfoForm;
  */
 public class CategoryInfoFormValidatorImpl implements ConstraintValidator<CategoryInfoFormValidator, CategoryInfoForm> {
 
-    // 禁止文字の定数宣言（@Pattern でカバーできないもの）
-	private static final String[] FORBIDDEN_CHARACTERS = { " ", "　", "{", "}", "(", ")", "'", "*", ";", "$", "=", "&" };
+    // 禁止文字の定数宣言（@でカバーできないもの）
+	private static final String FORBIDDEN_CHARACTERS = " 　{}()'*;=$&";
 	
     @Override
     public boolean isValid(CategoryInfoForm form, ConstraintValidatorContext context) {
@@ -23,17 +23,28 @@ public class CategoryInfoFormValidatorImpl implements ConstraintValidator<Catego
             return true;
         }
 
-        String categoryName = form.getCategoryName().trim();
-
-        // 禁止文字チェック（{ } ; = $ & を含んでいるか）
-        for (String forbiddenChar : FORBIDDEN_CHARACTERS) {
-            if (categoryName.contains(forbiddenChar)) {
-                addErrorMessage(context, ErrorMessage.CATEGORY_NAME_FORBIDDEN);
-                return false;
-            }
+        // 禁止文字チェック
+        if (forbiddenCharacterExists(form.getCategoryName().trim())) {
+            addErrorMessage(context, ErrorMessage.CATEGORY_NAME_FORBIDDEN);
+            return false;
         }
 
         return true;
+    }
+    
+    /**
+     * 禁止文字が含まれているかを判定
+     * 
+     * @param input 判定対象の文字列
+     * @return 禁止文字が含まれている場合は true
+     */
+    private boolean forbiddenCharacterExists(String input) {
+        for (char c : FORBIDDEN_CHARACTERS.toCharArray()) {
+            if (input.indexOf(c) != -1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
