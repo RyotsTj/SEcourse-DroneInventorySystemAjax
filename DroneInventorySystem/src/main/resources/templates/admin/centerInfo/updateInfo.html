@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}"
+>
+  <head>
+    <title>InvenTrack</title>
+  </head>
+  
+  <body>
+	<div class="card shadow mb-4">
+
+		<div class="card-header py-3">
+			<h6 class="m-0 font-weight-bold text-primary">在庫センター情報 更新/削除</h6>
+		</div>
+		
+		<div class="card-body">
+			<!-- 在庫センター情報テーブル -->
+			<div class="table-responsive">
+				<input type="hidden" th:field="*{centerId}">
+				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+					    <tbody>
+							<!-- 隠しセンターID -->
+							<input type="hidden" th:field="*{centerId}">
+							
+					        <!-- 在庫センター名 -->
+					        <tr>
+					            <td>在庫センター名 ＊</td>
+					            <td th:text="${centerInfo.centerName}"></td>
+					        </tr>
+					        <!-- 郵便番号 -->
+					        <tr>
+					            <td>郵便番号 ＊</td>
+					            <td th:text="${centerInfo.postCode}"></td>
+					        </tr>
+					        <!-- 住所 -->
+					        <tr>
+					            <td>住所 ＊</td>
+					            <td th:text="${centerInfo.address}"></td>
+					        </tr>
+					        <!-- 電話番号 -->
+					        <tr>
+					            <td>電話番号 ＊</td>
+					            <td th:text="${centerInfo.phoneNumber}"></td>
+					        </tr>
+					        <!-- 管理者名 -->
+					        <tr>
+					            <td>管理者名 ＊</td>
+					            <td th:text="${centerInfo.managerName}"></td>
+					        </tr>
+					        <!-- 稼働ステータス -->
+					        <tr>
+					            <td>稼働ステータス ＊</td>
+					            <td th:text="${centerInfo.operationalStatus == 0 ? '稼働' : '停止'}"></td>
+					        </tr>
+					        <!-- 最大容量 -->
+					        <tr>
+					            <td>最大容量 (m³) ＊</td>
+					            <td th:text="${centerInfo.maxStorageCapacity}"></td>
+					        </tr>
+					        <!-- 現在容量 -->
+					        <tr>
+					            <td>現在容量 (m³) ＊</td>
+					            <td th:text="${centerInfo.currentStorageCapacity}"></td>
+					        </tr>
+					        <!-- 備考 -->
+					        <tr>
+					            <td>備考</td>
+					            <td th:text="${centerInfo.notes}"></td>
+					        </tr>
+					    </tbody>
+					</table>
+			</div>
+			
+			<!-- ボタンエリア -->
+			<div class="d-flex justify-content-between mt-4">
+			    <!-- キャンセルボタン -->
+			    <button type="button" class="btn btn-secondary" onclick="goBack()">キャンセル</button>
+
+			    <!-- 削除ボタン -->
+				<div style="text-align: right; margin-top: 10px;">
+					<input type="hidden" name="centerId" th:value="${centerInfo.centerId}">
+					<button type="button" id="deleteBtn" class="btn btn-danger ml-2"
+					    th:if="${centerInfo.centerId != null}">
+					削除
+					</button>
+				
+
+			    <!-- 更新ボタン（編集画面へ遷移） -->
+			    <button class="btn btn-primary" th:onclick="|location.href='@{/admin/centerInfo/update/{centerId}(centerId=${centerInfo.centerId})}'|"
+				        style="background-color: #f8c471; border: none; border-radius: 5px;">更新</button>
+			</div>
+			
+			<script>
+			    function goBack() {
+			        window.location.href = "/admin/centerInfo";
+			    }
+			</script>
+
+			
+	    </div>
+	</div>
+	<script th:src="@{/js/centerInfoDelete.js}"></script>
+  </body>
+</html>

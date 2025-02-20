@@ -1,6 +1,7 @@
 package com.digitalojt.web.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,4 +32,12 @@ public interface CenterInfoRepository extends JpaRepository<CenterInfo, Integer>
 	List<CenterInfo> findByCenterNameAndRegionAndStorageCapacity(
 			String centerName,
 			String region);
+	
+	/**
+	 * センターIDを使ってセンター情報を取得
+	 * 
+	 * @param centerId
+	 * @return centerIdで検索した在庫センター情報結果
+	 */
+	Optional<CenterInfo> findById(int centerId);
 }

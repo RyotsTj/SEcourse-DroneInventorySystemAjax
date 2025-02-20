@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layout/template :: layout(~{::title},~{::body/content()})}"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>InvenTrack - 更新</title>
+</head>
+<body>
+	<div class="card shadow mb-4">
+	    <div class="card-header py-3">
+	        <h6 class="m-0 font-weight-bold text-primary">在庫センター情報 更新</h6>
+	    </div>
+	    <div class="card-body">
+			<!-- エラーメッセージ表示エリア -->
+			<div id="errorContainer" class="alert alert-danger" style="display:none;"></div>
+					
+	        <!-- 更新フォーム -->
+	        <form id="updateForm" method="post" th:action="@{/admin/centerInfo/update}" th:object="${centerInfoUpdateForm}">
+				<input type="hidden" th:field="*{centerId}"> 
+				
+				<table class="table table-bordered">
+				    <thead>
+				        <tr><th colspan="2">＊必須項目</th></tr>
+				    </thead>
+					
+				    <tbody>
+				        <!-- 在庫センター名 -->
+				        <tr>
+				            <td>在庫センター名 ＊</td>
+							<td>
+							    <input type="text" name="centerName" th:field="*{centerName}" class="form-control">
+							    <span class="text-danger error-message" id="error-centerName"></span>
+							</td>
+				        </tr>
+				        <!-- 郵便番号 -->
+				        <tr>
+				            <td>郵便番号 ＊</td>
+				            <td>
+				                <input type="text" class="form-control" th:field="*{postCode}" required pattern="\d{3}-\d{4}">
+				                <span class="text-danger error-message" id="error-postCode"></span>
+				            </td>
+				        </tr>
+				        <!-- 住所 -->
+				        <tr>
+				            <td>住所 ＊</td>
+				            <td>
+				                <input type="text" class="form-control" th:field="*{address}" required>
+				                <span class="text-danger error-message" id="error-address"></span>
+				            </td>
+				        </tr>
+				        <!-- 電話番号 -->
+				        <tr>
+				            <td>電話番号 ＊</td>
+				            <td>
+				                <input type="text" class="form-control" th:field="*{phoneNumber}" required pattern="\d{2,4}-\d{2,4}-\d{4}">
+				                <span class="text-danger error-message" id="error-phoneNumber"></span>
+				            </td>
+				        </tr>
+				        <!-- 管理者名 -->
+				        <tr>
+				            <td>管理者名 ＊</td>
+				            <td>
+				                <input type="text" class="form-control" th:field="*{managerName}" required>
+				                <span class="text-danger error-message" id="error-managerName"></span>
+				            </td>
+				        </tr>
+				        <!-- 稼働ステータス -->
+				        <tr>
+				            <td>稼働ステータス ＊</td>
+				            <td>
+				                <input type="radio" th:field="*{operationalStatus}" value="0" required> 稼働
+				                <input type="radio" th:field="*{operationalStatus}" value="1"> 停止
+				                <span class="text-danger error-message" id="error-operationalStatus"></span>
+				            </td>
+				        </tr>
+				        <!-- 最大容量 -->
+				        <tr>
+				            <td>最大容量 (m³) ＊</td>
+				            <td>
+				                <input type="number" class="form-control" th:field="*{maxStorageCapacity}" required min="1">
+				                <span class="text-danger error-message" id="error-maxStorageCapacity"></span>
+				            </td>
+				        </tr>
+				        <!-- 現在容量 -->
+				        <tr>
+				            <td>現在容量 (m³) ＊</td>
+				            <td>
+				                <input type="number" class="form-control" th:field="*{currentStorageCapacity}" required min="0">
+				                <span class="text-danger error-message" id="error-currentStorageCapacity"></span>
+				            </td>
+				        </tr>
+				        <!-- 備考 -->
+				        <tr>
+				            <td>備考</td>
+				            <td>
+				                <textarea class="form-control" th:field="*{notes}" rows="2" cols="50"></textarea>
+				                <span class="text-danger error-message" id="error-notes"></span>
+				            </td>
+				        </tr>
+				    </tbody>
+				</table>
+				
+				<!-- エラーメッセージの表示 -->
+				<div id="errorContainer" class="text-danger"></div>
+
+	            <!-- ボタンエリア -->
+	            <div class="d-flex justify-content-between mt-4">
+	                <!-- キャンセルボタン（詳細ページへ戻る） -->
+	                <button type="button" class="btn btn-secondary" 
+	                    th:onclick="|location.href='@{/admin/centerInfo/updateInfo/{centerId}(centerId=${centerInfoUpdateForm.centerId})}'|">
+	                    キャンセル
+	                </button>
+
+	                <!-- 更新　登録ボタン -->
+					<input type="hidden" name="confirmFlag" id="confirmFlag" value="false">
+					<button type="submit" id="registerBtn" class="btn btn-success ml-2" 
+					        style="background-color: #f8c471; border: none; border-radius: 5px;">登録</button>
+	            </div>
+	        </form>
+	    </div>
+	</div>
+
+	<!-- 備考の入力欄を自動で広げる -->
+	<script>
+	function autoExpand(textarea) {
+	    textarea.style.height = "auto";
+	    textarea.style.height = textarea.scrollHeight + "px";
+	}
+	</script>
+
+<!-- 外部JSファイルを読み込む -->
+<script th:src="@{/js/centerInfoUpdate.js}"></script> <!-- 外部JSファイルのパス -->
+</body>
+</html>

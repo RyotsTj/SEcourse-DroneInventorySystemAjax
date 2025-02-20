@@ -47,6 +47,18 @@ public class UrlConsts {
 	// 在庫センター情報画面 検索
 	public static final String CENTER_INFO_SEARCH = "/admin/centerInfo/search";
 	
+	// 在庫センター情報画面 登録
+	public static final String CENTER_INFO_REGISTER = "/admin/centerInfo/register";
+	
+	// 在庫センター情報画面 更新
+	public static final String CENTER_INFO_UPDATE = "/admin/centerInfo/update";
+	
+	// 在庫センター情報画面 削除
+	public static final String CENTER_INFO_DELETE = "/admin/centerInfo/delete";
+	
+	// 在庫センター情報画面 更新画面初期表示
+	public static final String CENTER_INFO_UPDATE_INFO = "/admin/centerInfo/updateInfo";
+	
 	// 操作履歴画面
 	public static final String  OPERATION_LOG = "/admin/operationLog";
 
