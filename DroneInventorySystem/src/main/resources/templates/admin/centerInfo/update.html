@@ -17,7 +17,7 @@
 			<div id="errorContainer" class="alert alert-danger" style="display:none;"></div>
 					
 	        <!-- 更新フォーム -->
-	        <form id="updateForm" method="post" th:action="@{/admin/centerInfo/update}" th:object="${centerInfoUpdateForm}">
+	        <form id="updateForm" method="patch" th:action="@{/admin/centerInfo/update}" th:object="${centerInfoUpdateForm}">
 				<input type="hidden" th:field="*{centerId}"> 
 				
 				<table class="table table-bordered">

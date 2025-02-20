@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -167,7 +168,6 @@ public class CenterInfoController extends AbstractController {
         
     	try {
         	if (!confirmFlag) {
-                // 入力チェックを行う（仮なので通った場合のみ）
                 boolean isValid = true;
                 if (isValid) {
                     model.addAttribute("form", form);
@@ -175,7 +175,6 @@ public class CenterInfoController extends AbstractController {
                     return ResponseEntity.ok("success");
                 }
             }
-            // confirmFlag=trueのときは最終的な処理を行う
             // サービスを呼び出しデータを登録処理し、成功時は "success" を返す
             centerInfoService.registerCenterInfo(form);
             logEnd(LogMessage.HTTP_POST);
@@ -187,17 +186,16 @@ public class CenterInfoController extends AbstractController {
     }
 	
 	/**
-	 * 更新処理 初期表示
+	 * 更新処理 初期表示 センターID に基づいて情報を取得
 	 * 
 	 * @param model
 	 * @param form
 	 * @return
 	 */
-	@GetMapping("/admin/centerInfo/updateInfo/{centerId}")
+	@GetMapping(UrlConsts.CENTER_INFO_UPDATE_INFO + "/{centerId}")
 	public String updateInfo(Model model, @PathVariable int centerId) {
 
 		logStart(LogMessage.HTTP_GET);
-	    // センター名 に基づいて情報を取得
 	    CenterInfo centerInfo = centerInfoService.getCenterInfoById(centerId);
 		logEnd(LogMessage.HTTP_GET);
 		model.addAttribute("centerInfo", centerInfo);
@@ -226,13 +224,13 @@ public class CenterInfoController extends AbstractController {
 	 * @param form
 	 * @return
 	 */
-    @PostMapping(UrlConsts.CENTER_INFO_UPDATE)
+    @PatchMapping(UrlConsts.CENTER_INFO_UPDATE)
     @ResponseBody
     public ResponseEntity<String> updete(
             @RequestParam(value = "confirmFlag", defaultValue = "false") boolean confirmFlag, 
             @Valid @ModelAttribute CenterInfoUpdateForm form, BindingResult bindingResult, Model model) {
     	
-    	logStart(LogMessage.HTTP_POST + " " + confirmFlag);
+    	logStart(LogMessage.HTTP_PATCH + " " + confirmFlag);
     	
         // 入力チェック；Valid項目チェック
         if (bindingResult.hasErrors()) {
@@ -254,14 +252,14 @@ public class CenterInfoController extends AbstractController {
                 boolean isValid = true;
                 if (isValid) {
                     model.addAttribute("form", form);
-                    logEnd(LogMessage.HTTP_POST + " チェック完了");
+                    logEnd(LogMessage.HTTP_PATCH + " チェック完了");
                     return ResponseEntity.ok("success");
                 }
             }
             // confirmFlag=trueのときは最終的な処理を行う
             // サービスを呼び出しデータを登録処理し、成功時は "success" を返す
             centerInfoService.updateCenterInfo(form);
-            logEnd(LogMessage.HTTP_POST);
+            logEnd(LogMessage.HTTP_PATCH);
             return ResponseEntity.ok("success");
     	} catch (Exception e) {
             logEnd("登録処理中にエラーが発生しました: " + e.getMessage());
@@ -269,14 +267,14 @@ public class CenterInfoController extends AbstractController {
         }
     }
     
-    @PostMapping(UrlConsts.CENTER_INFO_DELETE)
+    @PatchMapping(UrlConsts.CENTER_INFO_DELETE)
     @ResponseBody
     public ResponseEntity<String> delete(int centerId) {
-    	logStart(LogMessage.HTTP_POST);
+    	logStart(LogMessage.HTTP_PATCH);
         try {
         	// confirmFlag=trueのときは最終的な処理を行う
             centerInfoService.deleteCenterInfo(centerId);
-            logEnd(LogMessage.HTTP_POST);
+            logEnd(LogMessage.HTTP_PATCH);
             return ResponseEntity.ok("success");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");

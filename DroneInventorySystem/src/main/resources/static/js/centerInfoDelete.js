@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       const response = await fetch("/admin/centerInfo/delete", {
-        method: "POST",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
           [csrfHeader]: csrfToken

@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	  // 最初の非同期リクエストでサーバーにフォームデータを送信
 	fetch("/admin/centerInfo/update", {
-	    method: "POST",  // HTTPメソッドはPOST
+	    method: "PATCH",  // HTTPメソッドはPOST
 	    body: formData, // フォームデータをリクエストのボディに設定
 	  })
 	    .then((response) => {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	          // 再度フォームデータをサーバーに送信
 	          fetch("/admin/centerInfo/update", {
-	            method: "POST",  // HTTPメソッドはPOST
+	            method: "PATCH",  // HTTPメソッドはPOST
 	            body: formDataForResend, // 再送信するフォームデータを設定
 	          })
 	            .then((response) => response.text())  // サーバーからのレスポンスをテキストとして受け取る
