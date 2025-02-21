@@ -10,20 +10,21 @@
 <body>
 	<div class="card shadow mb-4">
 	    <div class="card-header py-3">
-	        <h6 class="m-0 font-weight-bold text-primary">在庫センター情報 更新</h6>
+	        <h6 class="m-0 font-weight-bold text-primary">在庫センター情報 更新/削除</h6>
 	    </div>
 	    <div class="card-body">
 			<!-- エラーメッセージ表示エリア -->
 			<div id="errorContainer" class="alert alert-danger" style="display:none;"></div>
 					
 	        <!-- 更新フォーム -->
-	        <form id="updateForm" method="patch" th:action="@{/admin/centerInfo/update}" th:object="${centerInfoUpdateForm}">
-				<input type="hidden" th:field="*{centerId}"> 
-				
+	        <form id="updateForm" method="patch" th:action="@{/admin/centerInfo/update}" th:object="${centerInfoUpdateForm}">				
 				<table class="table table-bordered">
 				    <thead>
 				        <tr><th colspan="2">＊必須項目</th></tr>
 				    </thead>
+					
+					<!-- 在庫センターID -->
+					<input type="hidden" th:field="*{centerId}"> 
 					
 				    <tbody>
 				        <!-- 在庫センター名 -->
@@ -101,26 +102,42 @@
 				        </tr>
 				    </tbody>
 				</table>
-				
-				<!-- エラーメッセージの表示 -->
-				<div id="errorContainer" class="text-danger"></div>
 
-	            <!-- ボタンエリア -->
-	            <div class="d-flex justify-content-between mt-4">
-	                <!-- キャンセルボタン（詳細ページへ戻る） -->
-	                <button type="button" class="btn btn-secondary" 
-	                    th:onclick="|location.href='@{/admin/centerInfo/updateInfo/{centerId}(centerId=${centerInfoUpdateForm.centerId})}'|">
-	                    キャンセル
-	                </button>
+				<!-- ボタンエリア -->
+				<div class="d-flex justify-content-between mt-4">
+				    <!-- キャンセルボタン（左寄せ） -->
+				    <button type="button" class="btn btn-secondary" onclick="goBack()">キャンセル</button>
 
-	                <!-- 更新　登録ボタン -->
-					<input type="hidden" name="confirmFlag" id="confirmFlag" value="false">
-					<button type="submit" id="registerBtn" class="btn btn-success ml-2" 
-					        style="background-color: #f8c471; border: none; border-radius: 5px;">登録</button>
-	            </div>
+				    <!-- 削除ボタン -->
+				    <div>
+				        <button type="button" id="deleteBtn" class="btn btn-danger ml-2">削除</button>
+						<!-- 更新ボタン -->
+						<input type="hidden" name="confirmFlag" id="confirmFlag" value="false">
+						<button type="submit" id="registerBtn" class="btn btn-success ml-2" 
+						        style="background-color: #f8c471; border: none; border-radius: 5px;">
+								更新</button>
+				        </button>
+				    </div>
+				</div>
+					
+					<script>
+					    function goBack() {
+					        window.location.href = "/admin/centerInfo";
+					    }
+					</script>
+
+					
+				</div>
 	        </form>
 	    </div>
 	</div>
+	
+	<!-- 前のページに戻る -->
+	<script>
+	    function goBack() {
+	        window.history.back();
+	    }
+	</script>
 
 	<!-- 備考の入力欄を自動で広げる -->
 	<script>
@@ -131,6 +148,7 @@
 	</script>
 
 <!-- 外部JSファイルを読み込む -->
-<script th:src="@{/js/centerInfoUpdate.js}"></script> <!-- 外部JSファイルのパス -->
+<script th:src="@{/js/centerInfoUpdate.js}"></script>
+<script th:src="@{/js/centerInfoDelete.js}"></script>
 </body>
 </html>

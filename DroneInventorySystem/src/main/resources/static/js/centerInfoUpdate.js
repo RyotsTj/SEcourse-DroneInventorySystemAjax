@@ -6,7 +6,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	const registerBtn = document.getElementById("registerBtn");  // 更新ボタンの要素を取得
 	const form = document.getElementById("updateForm");  // フォームの要素を取得
 	const confirmFlagInput = document.getElementById("confirmFlag");  // 確認フラグの入力フィールドを取得
-	const errorContainer = document.getElementById("errorContainer");  // エラーを表示
+	
+	// 既存データの色　薄いグレー
+	document.querySelectorAll(".form-control").forEach(input => {
+	    if (input.value.trim() !== "") {
+	        input.style.color = "#B0B0B0"; // ここを変更（薄いグレー）
+	    }
+	    input.addEventListener("input", function () {
+	        this.style.color = "black"; // ユーザーが入力すると黒に変更
+	    });
+	});
 
 	// 登録ボタンがクリックされたときの処理
 	registerBtn.addEventListener("click", function (event) {
@@ -65,22 +74,19 @@ document.addEventListener("DOMContentLoaded", function () {
 	            .catch((error) => {
 	              console.error("再送信中のエラー:", error);  // 再送信中のエラーをコンソールに表示
 	              alert("通信エラーが発生しました");  // ユーザーにエラーメッセージを表示
-				  errorContainer.innerHTML = `<div>${data}</div>`;
-				  errorContainer.style.display = "block";
+				  alert(data.replace(/<br\s*\/?>/g, "\n"));
 	            });
 	        }
 	      } else {
 	        console.log("更新に失敗しました"); // 失敗時のログ
 	        alert("更新に失敗しました");  // サーバーから失敗のメッセージが返ってきた場合
-			errorContainer.innerHTML = `<div>${data}</div>`;
-			errorContainer.style.display = "block";
+			alert(data.replace(/<br\s*\/?>/g, "\n"));
 	      }
 	    })
 	    .catch((error) => {
 	      console.error("通信エラー:", error);  // 通信エラーが発生した場合のログ
-	      alert("通信エラーが発生しました");  // ユーザーにエラーメッセージを表示
-		  errorContainer.innerHTML = `<div>${data}</div>`;
-		  errorContainer.style.display = "block";
+		  alert("予期せぬエラーを検知しました。システム管理者へ問い合わせください。）");
+		  alert(data.replace(/<br\s*\/?>/g, "\n"));
 	    });
 	})
   });

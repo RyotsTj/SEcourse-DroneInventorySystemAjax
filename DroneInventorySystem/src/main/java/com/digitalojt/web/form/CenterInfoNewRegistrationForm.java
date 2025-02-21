@@ -32,7 +32,7 @@ public class CenterInfoNewRegistrationForm {
 	/**
 	 * 郵便番号
 	 */
-    @Pattern(regexp = "\\d{3}-\\d{4}", message = "{centerName.halfWidth.numbers.hyphen}")
+    @Pattern(regexp = "\\d{3}-\\d{4}", message = "郵便番号は{centerName.halfWidth.numbers.hyphen}")
 	private String postCode;
 	
 	/**
@@ -44,7 +44,7 @@ public class CenterInfoNewRegistrationForm {
 	/**
 	 * 電話番号
 	 */
-	@Pattern(regexp = "\\d{2,4}-\\d{2,4}-\\d{4}", message = "{centerName.halfWidth.numbers.hyphen}")
+	@Pattern(regexp = "\\d{2,4}-\\d{2,4}-\\d{4}", message = "電話番号は{centerName.halfWidth.numbers.hyphen}")
 	private String phoneNumber;
 	
 	/**

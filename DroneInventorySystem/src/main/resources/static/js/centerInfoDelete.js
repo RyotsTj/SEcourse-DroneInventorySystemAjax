@@ -48,11 +48,11 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("削除が完了しました");
         window.location.href = "/admin/centerInfo";
       } else {
-        alert("削除に失敗しました。サーバーレスポンス: " + data);
+        alert("削除に失敗しました。");
       }
     } catch (error) {
-      console.error("削除処理エラー:", error);
-      alert("通信エラーが発生しました。");
+      console.error("通信エラー:", error);
+	  alert("予期せぬエラーを検知しました。システム管理者へ問い合わせください。）");
     }
   });
 });

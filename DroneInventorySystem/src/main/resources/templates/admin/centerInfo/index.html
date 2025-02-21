@@ -56,7 +56,7 @@
 						<tr th:each="item : ${centerInfoList}">
 							<td> 
 								<!-- センター名をリンクに変更（下線追加） -->
-								<a th:href="@{/admin/centerInfo/updateInfo/{centerId}(centerId=${item.centerId})}" 
+								<a th:href="@{/admin/centerInfo/update/{centerId}(centerId=${item.centerId})}" 
 								   th:text="${item.centerName}"
 								   style="text-decoration: underline;">
 								</a>

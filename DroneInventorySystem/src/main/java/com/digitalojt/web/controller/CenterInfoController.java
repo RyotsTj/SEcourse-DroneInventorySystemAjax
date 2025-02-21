@@ -186,23 +186,6 @@ public class CenterInfoController extends AbstractController {
     }
 	
 	/**
-	 * 更新処理 初期表示 センターID に基づいて情報を取得
-	 * 
-	 * @param model
-	 * @param form
-	 * @return
-	 */
-	@GetMapping(UrlConsts.CENTER_INFO_UPDATE_INFO + "/{centerId}")
-	public String updateInfo(Model model, @PathVariable int centerId) {
-
-		logStart(LogMessage.HTTP_GET);
-	    CenterInfo centerInfo = centerInfoService.getCenterInfoById(centerId);
-		logEnd(LogMessage.HTTP_GET);
-		model.addAttribute("centerInfo", centerInfo);
-		return UrlConsts.CENTER_INFO_UPDATE_INFO;
-	}
-	
-	/**
 	 * 更新処理 入力フォーム
 	 * 
 	 * @param model
