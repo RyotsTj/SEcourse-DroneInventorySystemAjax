@@ -1,7 +1,6 @@
 package com.digitalojt.web.form;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
@@ -43,7 +42,7 @@ public class CenterInfoUpdateForm {
 	/**
 	 * 住所
 	 */
-	@NotBlank(message = "住所は必須です。")
+    @NotBlank(message = "住所；{centerName.requiredFields.empty}")
 	private String address;
 	
 	/**
@@ -55,13 +54,12 @@ public class CenterInfoUpdateForm {
 	/**
 	 * 管理者名
 	 */
-	@NotBlank(message = "管理者名は必須です。")
+	@NotBlank(message = "管理者名；{centerName.requiredFields.empty}")
 	private String managerName;
 	
 	/**
 	 * 稼働ステータス
 	 */
-	@NotNull(message = "稼働ステータスは必須です。")
 	private int operationalStatus;
 	
 	/**

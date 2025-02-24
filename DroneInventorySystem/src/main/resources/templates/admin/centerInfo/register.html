@@ -17,13 +17,16 @@
 			<div id="errorContainer" class="alert alert-danger" style="display:none;"></div>
 
 			<!-- 入力画面 -->
-			<form id="registerForm" method="post" th:action="@{/admin/centerInfo/register}" th:object="${centerInfoNewRegistrationForm}">
+			<form id="updateForm" method="post" th:action="@{/admin/centerInfo/register}" th:object="${centerInfoUpdateForm}">
 				<table class="table table-bordered">
 				    <thead>
 				        <tr><th colspan="2">＊必須項目</th></tr>
 				    </thead>
 					
 				    <tbody>
+						<!-- 在庫センターID -->
+						<input type="hidden" th:field="*{centerId}"> 
+						
 				        <!-- 在庫センター名 -->
 				        <tr>
 				            <td>在庫センター名 ＊</td>
@@ -107,7 +110,7 @@
 
 					    <!-- 登録ボタン -->
 						<input type="hidden" name="confirmFlag" id="confirmFlag" value="false">
-						<button type="submit" id="registerBtn" class="btn btn-success ml-2"
+						<button id="registerBtn" class="btn btn-success ml-2"
 						        style="background-color: #f8c471; border: none; border-radius: 5px;">登録</button>
 				</div>
 		</div>

@@ -26,7 +26,6 @@ import com.digitalojt.web.consts.Region;
 import com.digitalojt.web.consts.UrlConsts;
 import com.digitalojt.web.entity.CenterInfo;
 import com.digitalojt.web.form.CenterInfoForm;
-import com.digitalojt.web.form.CenterInfoNewRegistrationForm;
 import com.digitalojt.web.form.CenterInfoUpdateForm;
 import com.digitalojt.web.service.CenterInfoService;
 import com.digitalojt.web.util.MessageManager;
@@ -129,9 +128,9 @@ public class CenterInfoController extends AbstractController {
 	 */
     @GetMapping(UrlConsts.CENTER_INFO_REGISTER)
     public String showCreateForm(Model model) {
-    	CenterInfoNewRegistrationForm form = new CenterInfoNewRegistrationForm();
+    	CenterInfoUpdateForm form = new CenterInfoUpdateForm();
         form.setOperationalStatus(0);
-        model.addAttribute("centerInfoNewRegistrationForm", form);
+        model.addAttribute("centerInfoUpdateForm", form);
         return UrlConsts.CENTER_INFO_REGISTER;
     }
 	
@@ -146,7 +145,7 @@ public class CenterInfoController extends AbstractController {
     @ResponseBody
     public ResponseEntity<String> create(
             @RequestParam(value = "confirmFlag", defaultValue = "false") boolean confirmFlag, 
-            @Valid @ModelAttribute CenterInfoNewRegistrationForm form, BindingResult bindingResult, 
+            @Valid @ModelAttribute CenterInfoUpdateForm form, BindingResult bindingResult, 
             Model model) {
     	
     	logStart(LogMessage.HTTP_POST + " " + confirmFlag);
@@ -198,7 +197,6 @@ public class CenterInfoController extends AbstractController {
 	    model.addAttribute("centerInfoUpdateForm", centerInfo);
 	    return UrlConsts.CENTER_INFO_UPDATE;
 	}
-
 	
 	/**
 	 * 更新処理 更新入力フォームの情報を在庫センター情報テーブルへ登録す

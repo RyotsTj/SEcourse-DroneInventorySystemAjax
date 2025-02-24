@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.digitalojt.web.entity.CenterInfo;
-import com.digitalojt.web.form.CenterInfoNewRegistrationForm;
 import com.digitalojt.web.form.CenterInfoUpdateForm;
 import com.digitalojt.web.repository.CenterInfoRepository;
 
@@ -63,7 +62,7 @@ public class CenterInfoService {
 	 * @param centerInfo data
 	 */
     @Transactional
-    public void registerCenterInfo(CenterInfoNewRegistrationForm form) {
+    public void registerCenterInfo(CenterInfoUpdateForm form) {
     	CenterInfo entity = new CenterInfo();
         entity.setCenterName(form.getCenterName());
         entity.setPostCode(form.getPostCode());

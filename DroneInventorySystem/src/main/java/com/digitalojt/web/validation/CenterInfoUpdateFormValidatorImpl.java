@@ -26,10 +26,22 @@ public class CenterInfoUpdateFormValidatorImpl implements ConstraintValidator<Ce
             addErrorMessage(context, ErrorMessage.CENTER_NAME_FORBIDDEN_ERROR_MESSAGE);
             valid = false;
         }
+        
+        // 住所の禁止文字チェック
+        if (form.getAddress() != null && containsForbiddenCharacters(form.getAddress())) {
+            addErrorMessage(context, ErrorMessage.CENTER_NAME_FORBIDDEN_ERROR_MESSAGE);
+            valid = false;
+        }
+        
+        // 管理者名の禁止文字チェック
+        if (form.getManagerName() != null && containsForbiddenCharacters(form.getManagerName())) {
+            addErrorMessage(context, ErrorMessage.CENTER_NAME_FORBIDDEN_ERROR_MESSAGE);
+            valid = false;
+        }
 
         // 備考の禁止文字チェック
         if (form.getNotes() != null && containsForbiddenCharacters(form.getNotes())) {
-            addErrorMessage(context, ErrorMessage.CENTER_UNEXPECTED_ERROR_MESSAGE);
+            addErrorMessage(context, ErrorMessage.CENTER_NAME_FORBIDDEN_ERROR_MESSAGE);
             valid = false;
         }
 

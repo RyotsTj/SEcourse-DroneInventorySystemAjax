@@ -53,6 +53,9 @@ public class UrlConsts {
 	// 在庫センター情報画面 更新
 	public static final String CENTER_INFO_UPDATE = "/admin/centerInfo/update";
 	
+	// 在庫センター情報画面 更新
+	public static final String CENTER_INFO_UPDATE_INFO = "/admin/centerInfo/update/info";
+	
 	// 在庫センター情報画面 削除
 	public static final String CENTER_INFO_DELETE = "/admin/centerInfo/delete";
 	

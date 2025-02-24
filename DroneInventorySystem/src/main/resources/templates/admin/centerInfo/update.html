@@ -11,13 +11,13 @@
 	<div class="card shadow mb-4">
 	    <div class="card-header py-3">
 	        <h6 class="m-0 font-weight-bold text-primary">在庫センター情報 更新/削除</h6>
-	    </div>
+	    </div>	
+		    <!-- PATCH メソッドを指定 -->
 	    <div class="card-body">
 			<!-- エラーメッセージ表示エリア -->
 			<div id="errorContainer" class="alert alert-danger" style="display:none;"></div>
-					
-	        <!-- 更新フォーム -->
-	        <form id="updateForm" method="patch" th:action="@{/admin/centerInfo/update}" th:object="${centerInfoUpdateForm}">				
+			<!-- 更新フォーム -->
+			<form id="updateForm" method="patch" th:action="@{/admin/centerInfo/update}" th:object="${centerInfoUpdateForm}">
 				<table class="table table-bordered">
 				    <thead>
 				        <tr><th colspan="2">＊必須項目</th></tr>
@@ -108,47 +108,28 @@
 				    <!-- キャンセルボタン（左寄せ） -->
 				    <button type="button" class="btn btn-secondary" onclick="goBack()">キャンセル</button>
 
-				    <!-- 削除ボタン -->
+				    <!-- 削除ボタン & 更新ボタン（右寄せ） -->
 				    <div>
-				        <button type="button" id="deleteBtn" class="btn btn-danger ml-2">削除</button>
+				        <!-- 削除ボタン -->
+				        <button id="deleteBtn" class="btn btn-danger ml-2">
+				            削除
+				        </button>
 						<!-- 更新ボタン -->
 						<input type="hidden" name="confirmFlag" id="confirmFlag" value="false">
-						<button type="submit" id="registerBtn" class="btn btn-success ml-2" 
-						        style="background-color: #f8c471; border: none; border-radius: 5px;">
-								更新</button>
-				        </button>
+						<button id="updateBtn" class="btn btn-success ml-2" 
+								style="background-color: #f8c471; border: none; border-radius: 5px;">
+						    更新
+						</button>
 				    </div>
 				</div>
-					
-					<script>
-					    function goBack() {
-					        window.location.href = "/admin/centerInfo";
-					    }
-					</script>
 
 					
-				</div>
-	        </form>
-	    </div>
-	</div>
-	
-	<!-- 前のページに戻る -->
-	<script>
-	    function goBack() {
-	        window.history.back();
-	    }
-	</script>
-
-	<!-- 備考の入力欄を自動で広げる -->
-	<script>
-	function autoExpand(textarea) {
-	    textarea.style.height = "auto";
-	    textarea.style.height = textarea.scrollHeight + "px";
-	}
-	</script>
+		     </div>
+	     </form>
+	 </div>
+</div>
 
 <!-- 外部JSファイルを読み込む -->
-<script th:src="@{/js/centerInfoUpdate.js}"></script>
-<script th:src="@{/js/centerInfoDelete.js}"></script>
+<script th:src="@{/js/centerInfo.js}"></script>
 </body>
 </html>
