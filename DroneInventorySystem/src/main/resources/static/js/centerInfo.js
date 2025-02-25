@@ -77,11 +77,13 @@ document.addEventListener("DOMContentLoaded", function () {
 				  }
 				})
 				.catch((error) => {
-				console.error(`再送信中のエラー (${action}):`, error);
-				alert("処理に失敗しました");  // サーバーから失敗のメッセージが返ってきた場合
-				alert(data.replace(/<br\s*\/?>/g, "\n"));
+					console.error(`通信エラー (${action}):`, error);
+					alert("予期せぬエラーを検知しました。システム管理者へ問い合わせください。");
 				});
-			}
+			} 
+		} else if (data.includes("error")) {
+					  console.error(`エラーが返却されました。 (${action}):`, error);
+					  alert("予期せぬエラーを検知しました。システム管理者へ問い合わせください。");
 		} else {
           console.log(`${action === "register" ? "登録" : action === "update" ? "更新" : "削除"}に失敗しました`); // 失敗時のログ
           alert(`${action === "register" ? "登録" : action === "update" ? "更新" : "削除"}に失敗しました`);  // サーバーから失敗のメッセージが返ってきた場合

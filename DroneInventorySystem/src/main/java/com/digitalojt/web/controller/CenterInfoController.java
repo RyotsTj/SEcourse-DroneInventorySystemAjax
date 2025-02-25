@@ -128,9 +128,11 @@ public class CenterInfoController extends AbstractController {
 	 */
     @GetMapping(UrlConsts.CENTER_INFO_REGISTER)
     public String showCreateForm(Model model) {
+    	logStart(LogMessage.HTTP_GET);
     	CenterInfoUpdateForm form = new CenterInfoUpdateForm();
         form.setOperationalStatus(0);
         model.addAttribute("centerInfoUpdateForm", form);
+        logEnd(LogMessage.HTTP_GET);
         return UrlConsts.CENTER_INFO_REGISTER;
     }
 	
@@ -193,8 +195,10 @@ public class CenterInfoController extends AbstractController {
 	 */
 	@GetMapping(UrlConsts.CENTER_INFO_UPDATE + "/{centerId}")
 	public String showUpdateForm(@PathVariable int centerId, Model model) {
+		logStart(LogMessage.HTTP_GET);
 	    CenterInfo centerInfo = centerInfoService.getCenterInfoById(centerId);
 	    model.addAttribute("centerInfoUpdateForm", centerInfo);
+	    logEnd(LogMessage.HTTP_GET);
 	    return UrlConsts.CENTER_INFO_UPDATE;
 	}
 	
@@ -238,12 +242,12 @@ public class CenterInfoController extends AbstractController {
                 }
             }
             // confirmFlag=trueのときは最終的な処理を行う
-            // サービスを呼び出しデータを登録処理し、成功時は "success" を返す
+            // サービスを呼び出しデータを更新処理し、成功時は "success" を返す
             centerInfoService.updateCenterInfo(form);
             logEnd(LogMessage.HTTP_PATCH);
             return ResponseEntity.ok("success");
     	} catch (Exception e) {
-            logEnd("登録処理中にエラーが発生しました: " + e.getMessage());
+            logEnd("更新処理中にエラーが発生しました: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("error");
         }
     }
