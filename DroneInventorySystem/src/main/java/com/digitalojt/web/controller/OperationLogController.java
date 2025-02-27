@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.digitalojt.web.consts.LogMessage;
 import com.digitalojt.web.consts.ModelAttributeContents;
@@ -46,4 +48,29 @@ public class OperationLogController extends AbstractController {
 
 		return UrlConsts.OPERATION_LOG_INDEX;
 	}
+	
+    /**
+     * 画面ロード時にAjaxを利用した非同期処理を実行した初期表示
+     * 
+     * @param model
+     * @param page ページ番号
+     * @param size 取得件数
+     * @return ページングされた操作履歴のリスト
+     */
+    @GetMapping("/operationLog")
+    @ResponseBody
+    public List<OperationLog> pagedOperationLogs(Model model,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        logStart(LogMessage.HTTP_GET);
+
+        // 操作履歴情報の取得
+        List<OperationLog> operationLogList = operationLogService.getPagedOperationLogs(page, size);
+        model.addAttribute(ModelAttributeContents.OPERATION_LOG_LIST, operationLogList);
+
+        logEnd(LogMessage.HTTP_GET);
+        
+        return operationLogList;
+    }
 }
