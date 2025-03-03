@@ -22,6 +22,13 @@ function loadPage() { // loadPage関数の実行
         .then(data => {
             console.log("取得データ: ", data);
 			
+			// データが空ならテーブルに「データなし」のメッセージを表示
+			if (data.length === 0 && currentPage === 0) {
+			    document.querySelector("#operationLogBody").innerHTML = "<tr><td colspan='5'>データがありません</td></tr>";
+				console.warn("データがありません");
+			    hasMoreData = false;
+			    return;
+			} 
 			// データ取得
 			const tableBody = document.querySelector("#operationLogBody");
 			let rows = data.map(item => `

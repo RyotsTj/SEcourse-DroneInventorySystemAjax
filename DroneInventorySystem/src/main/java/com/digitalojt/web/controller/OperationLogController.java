@@ -39,13 +39,14 @@ public class OperationLogController extends AbstractController {
 	public String index(Model model) {
 
 		logStart(LogMessage.HTTP_GET);
-
-		// 操作履歴情報の取得
-		List<OperationLog> operationLogList = operationLogService.getOperationLogList();
-		model.addAttribute(ModelAttributeContents.OPERATION_LOG_LIST, operationLogList);
-
+		try {
+			// 操作履歴情報の取得
+			List<OperationLog> operationLogList = operationLogService.getOperationLogList();
+			model.addAttribute(ModelAttributeContents.OPERATION_LOG_LIST, operationLogList);
+        } catch (Exception e) {
+            return "error";
+        }
 		logEnd(LogMessage.HTTP_GET);
-
 		return UrlConsts.OPERATION_LOG_INDEX;
 	}
 	
@@ -59,18 +60,13 @@ public class OperationLogController extends AbstractController {
      */
     @GetMapping("/operationLog")
     @ResponseBody
-    public List<OperationLog> pagedOperationLogs(Model model,
+    public List<OperationLog> pagedOperationLog(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
-
         logStart(LogMessage.HTTP_GET);
-
         // 操作履歴情報の取得
-        List<OperationLog> operationLogList = operationLogService.getPagedOperationLogs(page, size);
-        model.addAttribute(ModelAttributeContents.OPERATION_LOG_LIST, operationLogList);
-
+        List<OperationLog> operationLogList = operationLogService.getPagedOperationLog(page, size);
         logEnd(LogMessage.HTTP_GET);
-        
         return operationLogList;
     }
 }

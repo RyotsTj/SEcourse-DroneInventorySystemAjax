@@ -33,7 +33,7 @@ public class OperationLogService {
      * @param size 取得件数
      * @return 操作履歴テーブルから取得した値をデータ加工したデータ
 	 */
-    public List<OperationLog> getPagedOperationLogs(int page, int size) {
+    public List<OperationLog> getPagedOperationLog(int page, int size) {
         List<OperationLog> allLogs = repository.findAllByOrderByCreateDateDesc();
 
         // ページング処理
