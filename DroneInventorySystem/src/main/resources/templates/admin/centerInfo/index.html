@@ -18,7 +18,7 @@
 			
 			<!-- 検索フォーム -->
 			<div class="search-container">
-				<form class="form-inline" method="post" th:action="@{'/admin/centerInfo/search'}" th:object="${CenterInfoForm}">
+				<form class="form-inline" method="get" th:action="@{'/admin/centerInfo/search'}" th:object="${CenterInfoForm}">
 					<label for="searchTerm" class="mr-2">検索条件</label>
 					
 					<label for="searchTerm" class="mr-2">センター名</label>
@@ -54,13 +54,27 @@
 					</thead>
 					<tbody>
 						<tr th:each="item : ${centerInfoList}">
-							<td> [[${item.centerName}]] </td>
+							<td> 
+								<!-- センター名をリンクに変更（下線追加） -->
+								<a th:href="@{/admin/centerInfo/update/{centerId}(centerId=${item.centerId})}" 
+								   th:text="${item.centerName}"
+								   style="text-decoration: underline;">
+								</a>
+							</td>
 							<td> [[${item.address}]] </td>
 							<td> [[${item.phoneNumber}]] </td>
 							<td> [[${item.managerName}]] </td>
 						</tr>
 					</tbody>
 				</table>
+			</div>
+			
+			<!-- 新規登録 ボタン -->
+			<div style="text-align: right; margin-top: 10px;">
+			    <a th:href="@{/admin/centerInfo/register}" 
+			       type="submit" id="registerBtn" class="btn btn-success ml-2"
+			       style="background-color: #f8c471; border: none; border-radius: 5px;">新規登録
+			    </a>
 			</div>
 		</div>
 	</div>
